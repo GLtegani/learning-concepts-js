@@ -84,6 +84,12 @@ for (let valor of array) {
 
 
 // TRY CATCH
+
+// O try catch é utilizado mais em momentos onde não tem como prever o erro que pode ocorrer ou que quando o erro aconteça
+// a aplicação quebre, se você souber os possíveis erros que podem acontecer, use if e else normalmente, além disso 
+// é recomendado utilizar esse tratamento de erros somente em blocos pequenos de código que você acha que pode dar algum erro
+// não em blocos grandes, pois assim você não consegue capturar o erro com precisão
+
 const PersonData = {
    name: 'Gabriel',
    age: 17,
@@ -100,3 +106,58 @@ try {
 } catch(e) {
    console.error(`JSON ERROR: ${e}`)
 };
+
+
+// PROMISSES ASYNC E AWAIT
+const routineToDo = () => {
+   return new Promise((resolve, reject) => {
+      setTimeout(() => {
+         let wakeUpEarly = true;
+
+         if(wakeUpEarly) {
+            resolve("Eu acordei cedo!");
+         } else {
+            reject(new Error("Eu não acordei cedo."));
+         };
+
+      }, 3000);
+         
+      setTimeout(() => {
+         let doExercises = true;
+
+         if(doExercises) {
+            resolve("Eu fiz exercícios!");
+         } else {
+            reject(new Error("Eu não fiz exercícios."));
+         };
+      }, 3000);
+
+      setTimeout(() => {
+         let readBooks = true;
+
+         if(readBooks) {
+            resolve("Eu li os livros!");
+         } else {
+            reject(new Error("Eu não li os livros."));
+         };
+      }, 3000);
+   });
+};
+
+const answersRoutine = async () => {
+   try {
+      const result = await routineToDo();
+      console.log(result);
+   } catch(error) {
+      console.error(error);
+   };
+};
+
+answersRoutine();
+
+// São utilizadas em operações que levam tempo a serem concluidas e assincronas 
+
+// JSON FILES
+fetch("./dataTest.json").then(response => response.json()).then(value => console.log(value))
+
+

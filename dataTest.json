@@ -1,3 +1,6 @@
 {
-   "userName": "Gabriel"
+   "name": "Gabriel",
+   "age": 17,
+   "gender": "male",
+   "job": "Developer"
 }
