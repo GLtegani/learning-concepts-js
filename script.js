@@ -113,33 +113,15 @@ const routineToDo = () => {
    return new Promise((resolve, reject) => {
       setTimeout(() => {
          let wakeUpEarly = true;
-
-         if(wakeUpEarly) {
-            resolve("Eu acordei cedo!");
-         } else {
-            reject(new Error("Eu não acordei cedo."));
-         };
-
-      }, 3000);
-         
-      setTimeout(() => {
          let doExercises = true;
-
-         if(doExercises) {
-            resolve("Eu fiz exercícios!");
-         } else {
-            reject(new Error("Eu não fiz exercícios."));
-         };
-      }, 3000);
-
-      setTimeout(() => {
          let readBooks = true;
 
-         if(readBooks) {
-            resolve("Eu li os livros!");
+         if(wakeUpEarly && doExercises && readBooks) {
+            resolve("Eu fiz todas as tarefas.");
          } else {
-            reject(new Error("Eu não li os livros."));
+            reject(new Error("Eu não fiz todas as tarefas."));
          };
+
       }, 3000);
    });
 };
@@ -147,7 +129,9 @@ const routineToDo = () => {
 const answersRoutine = async () => {
    try {
       const result = await routineToDo();
+      console.log('Começo');
       console.log(result);
+      console.log('Final');
    } catch(error) {
       console.error(error);
    };
