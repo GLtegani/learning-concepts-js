@@ -122,7 +122,7 @@ const routineToDo = () => {
             reject(new Error("Eu não fiz todas as tarefas."));
          };
 
-      }, 3000);
+      }, 7000);
    });
 };
 
@@ -142,6 +142,42 @@ answersRoutine();
 // São utilizadas em operações que levam tempo a serem concluidas e assincronas 
 
 // JSON FILES
-fetch("./dataTest.json").then(response => response.json()).then(value => console.log(value))
+const formUsers = fetch("./dataTest.json");
+const afk = 2;
+
+const dataForm = (archive) => {
+   return new Promise((resolve, reject) => {
+      setTimeout(() => {
+         try {
+            if(archive == 2) {
+               throw new Error('Falha na solicitação de arquivos.');
+            };
+   
+            resolve(archive.then(response => response.json()).then(data => console.log(data)));
+         } catch (error){
+            reject(`Erro inesperado ${error}`);
+         };
+      }, 3000);
+   });
+};
+
+const tester = async () => {
+
+   try {
+      console.log('Iniciando requisição...');
+      await dataForm(formUsers);
+      await dataForm(afk);
+      if(!dataForm(formUsers).ok || !dataForm(afk).ok)  {
+         throw new Error();
+      };
 
 
+   } catch (error) {
+      console.error(`Erro inesperado ${error}`);
+   };
+   console.log(`Requisição finalizada.`);
+
+
+};
+
+tester();
